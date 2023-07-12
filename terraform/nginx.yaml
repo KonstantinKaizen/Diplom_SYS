@@ -1,0 +1,20 @@
+---
+- hosts: web
+  tasks:
+    - name: install nginx
+      apt: name=nginx state=latest
+
+    - name: change config
+      copy:
+        src: /var/www/html/index.nginx-debian.html
+        dest: /var/www/html/index.nginx-debian.html
+
+    - name: change config
+      copy:
+        src: /etc/nginx/nginx.conf
+        dest: /etc/nginx/nginx.conf
+
+    - name: restart nginx
+      service:
+         name: nginx
+         state: restarted

@@ -1,0 +1,103 @@
+---
+- hosts: web
+  tasks:
+    - name: chmod user /var/log/nginx
+      file:
+        dest: /var/log/nginx
+        mode: 0775
+        recurse: yes
+
+    - name: chmod admin /var/log/nginx/error.log
+      file:
+        dest: /var/log/nginx/error.log
+        mode: 0775
+
+    - name: chmod admin /var/log/nginx/access.log
+      file:
+        dest: /var/log/nginx/access.log
+        mode: 0775
+
+    - name: Create a directory "Node_exporter" if it does not exist
+      file:
+        path: /usr/local/bin/node-exporter
+        state: directory
+        owner: admin
+        group: admin
+        mode: 0644
+
+    - name: download node-exporter
+      ansible.builtin.unarchive:
+        src: https://github.com/prometheus/node_exporter/releases/download/v1.0.0/node_exporter-1.0.0.linux-amd64.tar.gz
+        dest: /usr/local/bin/node-exporter
+        remote_src: yes
+
+    - name: Copy file /usr/local/bin/node-exporter/node_exporter
+      copy:
+        src: /usr/local/bin/node-exporter/node_exporter-1.0.0.linux-amd64/node_exporter
+        dest: /usr/local/bin/node-exporter/node_exporter
+        remote_src: yes
+
+    - name: chmod root /etc/prometheus/node-exporte/node_exporter
+      file:
+        dest: /usr/local/bin/node-exporter
+        owner: admin
+        group: admin
+        mode: 0775
+        recurse: yes
+
+    - name: Touch node-exporter.service
+      file:
+        path: "/etc/systemd/system/node-exporter.service"
+        owner: admin
+        group: admin
+        mode: 0777
+        state: touch
+
+    - name: Add text with node-exporter.service
+      lineinfile:
+        dest: /etc/systemd/system/node-exporter.service
+        line: "{{ item }}"
+      with_items:
+        - "[Unit]"
+        - Description=Node Exporter Lesson 9.4
+        - After=network.target
+        - "[Service]"
+        - User=admin
+       # - Group=admin
+        - Type=simple
+        - ExecStart=/usr/local/bin/node-exporter/node_exporter
+        - "[Install]"
+        - WantedBy=multi-user.target
+
+    - name: Make sure a service is running
+      systemd:
+        state: started
+        name: node-exporter
+
+    - name: enable service tuned and ensure it is not masked
+      systemd:
+        name: node-exporter
+        enabled: yes
+        masked: no
+
+    - name: Install ./prometheus-nginxlog-exporter_1.8.0_linux_amd64.deb
+      apt:
+       deb: https://github.com/martin-helmich/prometheus-nginxlog-exporter/releases/download/v1.8.0/prometheus-nginxlog-exporter_1.8.0_linux_amd64.deb
+
+    - name: config log format prometheus-nginxlog-exporter
+      lineinfile:
+       dest: /etc/prometheus-nginxlog-exporter.hcl
+       regexp: '^\s* format'
+       line: '     format = "$remote_addr - [$time_local] \"$request\" $status $body_bytes_sent \"$http_referer\" \"$http_user_agent\" \"$http_x_forwarded_for\" \"$request_length\" \"$upstream_response_time\" \"$request_time\""'
+       backrefs: yes
+
+    - name: Make sure a service prometheus-nginxlog-exporter is running
+      systemd:
+        state: started
+        name: prometheus-nginxlog-exporter
+
+    - name: enable service prometheus-nginxlog-exporter and ensure it is not masked
+      systemd:
+        name: prometheus-nginxlog-exporter
+        enabled: yes
+        masked: no

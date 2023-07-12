@@ -1,0 +1,11 @@
+[web]
+web1 ansible_ssh_host=62.84.124.34 ansible_user=admin
+web2 ansible_ssh_host=158.160.64.128 ansible_user=admin
+[prometheus]
+prometheus1 ansible_ssh_host=51.250.42.24 ansible_user=admin
+[grafana]
+grafana1 ansible_ssh_host=51.250.33.39 ansible_user=admin
+[elastic]
+elastic1 ansible_ssh_host=51.250.32.53 ansible_user=admin
+[kibana]
+kibana1 ansible_ssh_host=51.250.42.205 ansible_user=admin

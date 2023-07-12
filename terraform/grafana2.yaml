@@ -1,0 +1,16 @@
+- hosts: grafana
+  become: yes
+  gather_facts: true
+  roles:
+    - role: cloudalchemy.grafana
+      vars:
+        grafana_version: latest
+        grafana_security:
+          admin_user: admin
+          admin_password: "admin"
+        grafana_datasources:
+          - name: prometheus
+            type: prometheus
+            access: proxy
+            url: "http://51.250.42.24:9090"
+            basicAuth: false
