@@ -31,7 +31,8 @@ Grafana - L/P - admin/admin
 ![image alt](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/snap-daily.png)
 
 
-![image alt](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/snap-daily.png)
+![image alt](./png/snap-daily.png)
+![ScreenShot](/png/snap-daily.png)
 
 
 
