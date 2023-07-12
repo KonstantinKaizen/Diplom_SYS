@@ -12,7 +12,7 @@ alb.
 Все playbooks лежат в папке ansible.
 Ниже скриншоты всей инфраструктуры
 
-![alt text](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/alb+nginx.png)
+![alt text](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/alb+nginx site.png)
 
 ![alt text](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/GRAFANA.png)
 
@@ -20,7 +20,6 @@ alb.
 
 ![alt text](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/prometheus.png)
 
-Grafana - L/P - admin/admin
 
 Скриншоты снапшотов + ежедневное копирование с жизнью снапшотов в неделю.
 
@@ -31,12 +30,9 @@ Grafana - L/P - admin/admin
 ![image alt](https://github.com/KonstantinKaizen/Diplom_SYS/blob/main/png/snap-daily.png)
 
 
-![image alt](./png/snap-daily.png)
-![ScreenShot](/png/snap-daily.png)
-
-
-
-![alt text](https://github.com/KonstantinKaizen/homework/blob/main/homework-13.02/LUKS4.png)
-
-
+Grafana - http://51.250.33.39:3000/   admin/admin
+Kibana  - http://51.250.42.205:5601/
+Prometheus - http://51.250.42.24:9090/
+ALB - 51.250.9.28
+elasticsearch - http://51.250.32.53:9200/
 
