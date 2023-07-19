@@ -74,12 +74,12 @@ resource "yandex_alb_virtual_host" "virtual_host" {
 resource "yandex_alb_load_balancer" "load_balancer" {
   name               = "load-balancer"
   network_id         = yandex_vpc_network.default.id
-  security_group_ids = [yandex_vpc_security_group.group-alb.id]
+ # security_group_ids = [yandex_vpc_security_group.public-load-balancer.id,yandex_vpc_security_group.private.id]
 
   allocation_policy {
     location {
-      zone_id   = "ru-central1-a"
-      subnet_id = yandex_vpc_subnet.ru-central1-a.id
+      zone_id   = "ru-central1-c"
+      subnet_id = yandex_vpc_subnet.ru-central1-c.id
     }
   }
 

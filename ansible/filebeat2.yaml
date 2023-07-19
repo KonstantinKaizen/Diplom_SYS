@@ -13,8 +13,8 @@
       deb: "/home/admin/filebeat-7.5.0-amd64.deb"
 
   - name: copy filebeat config file
-    copy:
-      src: filebeat.yml
+    template:
+      src: /etc/diplom/Diplom_SYS/ansible/filebeat.j2
       dest: /etc/filebeat/filebeat.yml
 
   - name: Make sure a service is running

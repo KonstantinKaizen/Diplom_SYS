@@ -126,6 +126,12 @@
         line: '     - targets: [''51.250.42.24:9090'', ''62.84.124.34:9100'', ''158.160.64.128:9100'', ''62.84.124.34:4040'', ''158.160.64.128:4040'']'
         backrefs: yes
 #########
+    - name: change config
+      template:
+        src: /etc/diplom/Diplom_SYS/ansible/prometheus.j2
+        dest: /etc/prometheus/prometheus.yml
+
+
     - name: Systemd daemon_reload
       systemd:
         daemon_reload: yes

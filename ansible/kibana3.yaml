@@ -8,8 +8,8 @@
       deb: "https://mirror.yandex.ru/mirrors/elastic/7/pool/main/k/kibana/kibana-7.5.0-amd64.deb"
 
   - name: copy kibana config file
-    copy:
-      src: kibana.yml
+    template:
+      src: /etc/diplom/Diplom_SYS/ansible/kibana.j2
       dest: /etc/kibana/kibana.yml
 
   - name: Make sure a service is running

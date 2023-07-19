@@ -12,5 +12,5 @@
           - name: prometheus
             type: prometheus
             access: proxy
-            url: "http://51.250.42.24:9090"
+            url: "http://{{ hostvars['prometheus1']['ansible_ssh_host'] }}:9090"
             basicAuth: false
