@@ -12,6 +12,9 @@ alb.
 Ниже скриншоты всей инфраструктуры
 
 
+Дашборд лежит в cloudalchemy.grafana.dashboards
+
+
 
 
 Grafana - http://51.250.33.32:3000/   admin/admin
